@@ -1,0 +1,51 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Rprofile
+
+# Ignore renv
+renv/
+
+# backup
+*~
+*#
+*.save
+*.SAVE
+*.BAK
+*.bak
+
+
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+.RDataTmp
+
+# User-specific files
+.Ruserdata
+
+# Example code in package build process
+*-Ex.R
+
+# Output files from R CMD build
+/*.tar.gz
+
+# Output files from R CMD check
+/*.Rcheck/
+
+# RStudio files
+.Rproj.user/
+
+# debug files and folders
+ERROR_*
+data/*
+data_public/*
+data_shared/*
+trace/*
+logs/*.rds
+/logs/
+USER_INPUT/
+user_input/

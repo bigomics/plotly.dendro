@@ -1,0 +1,10 @@
+^\.Rproj\.user$
+^\.Rhistory$
+^\.RData$
+^\.gitignore\.local\.save$
+^CLAUDE\.md$
+^AGENTS\.md$
+^\.git$
+^\.github$
+^renv$
+^renv\.lock$
