@@ -7,13 +7,16 @@ Description: Brings plotly Python dendrogram capabilities to R, enabling
     interactive hierarchical clustering visualizations using plotly. Provides
     functions to create, customize, and embed dendrograms in plotly figures,
     mirroring the feature set available in the Python plotly library.
+License: GPL-3
 Depends: R (>= 4.0.0)
 Imports:
     plotly,
     stats
 Suggests:
+    ggdendro,
+    jsonlite,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.0
+RoxygenNote: 7.3.3

@@ -8,3 +8,10 @@
 ^\.github$
 ^renv$
 ^renv\.lock$
+^references$
+^\.active_plans$
+^\.agents_context$
+^\.beads$
+^\.claude$
+^experiment$
+^Rplots\.pdf$
