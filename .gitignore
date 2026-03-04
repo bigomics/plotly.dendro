@@ -36,6 +36,10 @@ renv/
 # Output files from R CMD check
 /*.Rcheck/
 
+# R graphics device artifacts
+Rplots.pdf
+**/Rplots.pdf
+
 # RStudio files
 .Rproj.user/
 
