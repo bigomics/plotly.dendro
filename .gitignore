@@ -53,3 +53,7 @@ logs/*.rds
 /logs/
 USER_INPUT/
 user_input/
+
+# Dolt database files (added by bd init)
+.dolt/
+*.db
