@@ -1,6 +1,6 @@
 Package: plotly.dendro
 Title: Plotly Dendrogram Visualizations for R
-Version: 0.1.0
+Version: 0.1.1
 Authors@R:
     person("Santiago", "Cano Muniz", , "tisalon@outlook.com", role = c("aut", "cre"))
 Description: Brings plotly Python dendrogram capabilities to R, enabling

@@ -14,4 +14,6 @@
 ^\.beads$
 ^\.claude$
 ^experiment$
+^experiments$
+^\.semquery$
 ^Rplots\.pdf$

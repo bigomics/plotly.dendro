@@ -9,6 +9,7 @@
 #' @param linkagefun Linkage function.
 #' @param color_threshold Branch color cutoff.
 #' @param hovertext Optional hover text (reserved for future use).
+#' @param hang Fraction of tree height for leaf hang (see [dendro_data()]).
 #' @param ... Passed to lower-level plotting calls.
 #' @param data Optional plotly data.
 #' @param inherit Plotly inheritance flag.
@@ -25,6 +26,7 @@ add_dendro <- function(
     linkagefun = function(d) stats::hclust(d, method = "complete"),
     color_threshold = NULL,
     hovertext = NULL,
+    hang = NULL,
     ...,
     data = NULL,
     inherit = TRUE
@@ -34,7 +36,7 @@ add_dendro <- function(
     warning("hovertext is not yet implemented and will be ignored.", call. = FALSE)
   }
 
-  d <- dendro_data(x, distfun = distfun, linkagefun = linkagefun, labels = labels)
+  d <- dendro_data(x, distfun = distfun, linkagefun = linkagefun, labels = labels, hang = hang)
   od <- orient_data(d, orientation = orientation)
 
   p <- add_dendro_segments(

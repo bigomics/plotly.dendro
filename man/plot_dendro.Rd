@@ -13,6 +13,7 @@ plot_dendro(
   linkagefun = function(d) stats::hclust(d, method = "complete"),
   color_threshold = NULL,
   hovertext = NULL,
+  hang = NULL,
   width = NULL,
   height = NULL,
   source = "A",
@@ -35,6 +36,8 @@ plot_dendro(
 \item{color_threshold}{Branch color cutoff.}
 
 \item{hovertext}{Optional hover text (reserved for future use).}
+
+\item{hang}{Fraction of tree height for leaf hang (see \code{\link[=dendro_data]{dendro_data()}}).}
 
 \item{width}{Optional widget width.}
 

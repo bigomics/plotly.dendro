@@ -8,7 +8,8 @@ dendro_data(
   x,
   distfun = stats::dist,
   linkagefun = function(d) stats::hclust(d, method = "complete"),
-  labels = NULL
+  labels = NULL,
+  hang = NULL
 )
 }
 \arguments{
@@ -19,6 +20,10 @@ dendro_data(
 \item{linkagefun}{Linkage function used when \code{x} is matrix-like or \code{dist}.}
 
 \item{labels}{Optional leaf labels.}
+
+\item{hang}{Non-negative fraction of the tree height at which leaf segments
+are hung below their merge point, or a negative value to drop leaves to
+zero. \code{NULL} (the default) leaves segments unchanged.}
 }
 \value{
 A list with \code{segments}, \code{labels}, and \code{nodes} data frames.

@@ -8,6 +8,7 @@
 #' @param linkagefun Linkage function.
 #' @param color_threshold Branch color cutoff.
 #' @param hovertext Optional hover text (reserved for future use).
+#' @param hang Fraction of tree height for leaf hang (see [dendro_data()]).
 #' @param width Optional widget width.
 #' @param height Optional widget height.
 #' @param source Source id for `event_data()`.
@@ -24,6 +25,7 @@ plot_dendro <- function(
     linkagefun = function(d) stats::hclust(d, method = "complete"),
     color_threshold = NULL,
     hovertext = NULL,
+    hang = NULL,
     width = NULL,
     height = NULL,
     source = "A",
@@ -40,6 +42,7 @@ plot_dendro <- function(
     linkagefun = linkagefun,
     color_threshold = color_threshold,
     hovertext = hovertext,
+    hang = hang,
     ...
   )
 }

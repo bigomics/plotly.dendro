@@ -56,3 +56,11 @@ test_that("plot_dendro() is compatible with subplot()", {
   sp <- plotly::subplot(p1, p2, nrows = 2, shareX = TRUE)
   expect_s3_class(sp, "plotly")
 })
+
+test_that("plot_dendro() forwards hang into rendered segment geometry", {
+  built_default <- plotly::plotly_build(plot_dendro(tiny4))
+  built_hang <- plotly::plotly_build(plot_dendro(tiny4, hang = 0.1))
+
+  expect_false(identical(built_default$x$data[[1]]$y, built_hang$x$data[[1]]$y))
+  expect_identical(built_hang$x$layout$xaxis$ticktext, c("B", "C", "A", "D"))
+})

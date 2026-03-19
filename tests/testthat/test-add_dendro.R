@@ -32,3 +32,14 @@ test_that("layer functions can be chained", {
     add_dendro_nodes(d)
   expect_s3_class(p, "plotly")
 })
+
+test_that("add_dendro() forwards hang into rendered segment geometry", {
+  p_default <- plotly::plot_ly() |> add_dendro(tiny4)
+  p_hang <- plotly::plot_ly() |> add_dendro(tiny4, hang = 0.1)
+
+  built_default <- plotly::plotly_build(p_default)
+  built_hang <- plotly::plotly_build(p_hang)
+
+  expect_false(identical(built_default$x$data[[1]]$y, built_hang$x$data[[1]]$y))
+  expect_identical(built_hang$x$layout$xaxis$ticktext, c("B", "C", "A", "D"))
+})
