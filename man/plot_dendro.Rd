@@ -14,6 +14,8 @@ plot_dendro(
   color_threshold = NULL,
   hovertext = NULL,
   hang = NULL,
+  line = NULL,
+  show_labels = TRUE,
   width = NULL,
   height = NULL,
   source = "A",
@@ -39,6 +41,11 @@ plot_dendro(
 
 \item{hang}{Fraction of tree height for leaf hang (see \code{\link[=dendro_data]{dendro_data()}}).}
 
+\item{line}{A named list of plotly line properties (e.g.
+\code{list(width = 2, dash = "dot")}). See \code{\link[=add_dendro_segments]{add_dendro_segments()}} for details.}
+
+\item{show_labels}{Logical; if \code{FALSE}, omit tick labels from the leaf axis.}
+
 \item{width}{Optional widget width.}
 
 \item{height}{Optional widget height.}
@@ -48,7 +55,7 @@ plot_dendro(
 \item{...}{Passed to \code{add_dendro()}.}
 }
 \value{
-A \code{plotly} htmlwidget.
+A \code{plotly} htmlwidget with a \code{"dendro_data"} attribute.
 }
 \description{
 Create A Plotly Dendrogram

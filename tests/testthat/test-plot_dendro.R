@@ -64,3 +64,37 @@ test_that("plot_dendro() forwards hang into rendered segment geometry", {
   expect_false(identical(built_default$x$data[[1]]$y, built_hang$x$data[[1]]$y))
   expect_identical(built_hang$x$layout$xaxis$ticktext, c("B", "C", "A", "D"))
 })
+
+# --- dendro_data attribute -----------------------------------------------
+
+test_that("plot_dendro() returns dendro_data as attribute", {
+  p <- plot_dendro(tiny4)
+  d <- attr(p, "dendro_data")
+  expect_type(d, "list")
+  expect_true(all(c("segments", "labels", "nodes") %in% names(d)))
+  expect_s3_class(attr(d, "hclust"), "hclust")
+})
+
+test_that("dendro_data attribute has correct leaf count", {
+  p <- plot_dendro(tiny4)
+  d <- attr(p, "dendro_data")
+  expect_equal(nrow(d$labels), nrow(tiny4))
+})
+
+# --- New params: line, show_labels ---------------------------------------
+
+test_that("plot_dendro() passes line properties through", {
+  p <- plot_dendro(tiny4, line = list(color = "orange", width = 2.5))
+  built <- plotly::plotly_build(p)
+  colors <- vapply(built$x$data, function(tr) tr$line$color, character(1))
+  expect_true(all(colors == "orange"))
+  widths <- vapply(built$x$data, function(tr) tr$line$width, numeric(1))
+  expect_true(all(widths == 2.5))
+})
+
+test_that("plot_dendro() show_labels=FALSE suppresses all tick labels", {
+  p <- plot_dendro(tiny4, show_labels = FALSE)
+  built <- plotly::plotly_build(p)
+  expect_null(built$x$layout$xaxis$tickvals)
+  expect_false(isTRUE(built$x$layout$xaxis$showticklabels))
+})

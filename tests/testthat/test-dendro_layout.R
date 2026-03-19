@@ -115,3 +115,60 @@ test_that("dendro_layout() turns off grid and zeroline on leaf axis", {
   expect_false(isTRUE(ly$xaxis$showgrid))
   expect_false(isTRUE(ly$xaxis$zeroline))
 })
+
+# --- ticks = "" is always set -----------------------------------------------
+
+test_that("ticks is empty string on both axes by default", {
+  d  <- make_dendro_list(tiny4)
+  ly <- dendro_layout(d, "bottom")
+  expect_equal(ly$xaxis$ticks, "")
+  expect_equal(ly$yaxis$ticks, "")
+})
+
+test_that("ticks is empty string for horizontal orientations", {
+  d  <- make_dendro_list(tiny4)
+  od <- orient_data(d, "left")
+  ly <- dendro_layout(od, "left")
+  expect_equal(ly$xaxis$ticks, "")
+  expect_equal(ly$yaxis$ticks, "")
+})
+
+# --- show_labels = FALSE ----------------------------------------------------
+
+test_that("show_labels=FALSE omits tickvals and ticktext", {
+  d  <- make_dendro_list(tiny4)
+  ly <- dendro_layout(d, "bottom", show_labels = FALSE)
+  expect_null(ly$xaxis$tickvals)
+  expect_null(ly$xaxis$ticktext)
+  expect_null(ly$xaxis$tickmode)
+})
+
+test_that("show_labels=FALSE sets showticklabels=FALSE to suppress auto-ticks", {
+  d  <- make_dendro_list(tiny4)
+  ly <- dendro_layout(d, "bottom", show_labels = FALSE)
+  expect_false(ly$xaxis$showticklabels)
+})
+
+test_that("show_labels=FALSE still sets ticks='' and showgrid=FALSE", {
+  d  <- make_dendro_list(tiny4)
+  ly <- dendro_layout(d, "bottom", show_labels = FALSE)
+  expect_equal(ly$xaxis$ticks, "")
+  expect_false(isTRUE(ly$xaxis$showgrid))
+})
+
+test_that("show_labels=TRUE (default) still includes tickvals", {
+  d  <- make_dendro_list(tiny4)
+  ly <- dendro_layout(d, "bottom")
+  expect_false(is.null(ly$xaxis$tickvals))
+  expect_length(ly$xaxis$tickvals, nrow(tiny4))
+})
+
+test_that("show_labels=FALSE works with horizontal orientation", {
+  d  <- make_dendro_list(tiny4)
+  od <- orient_data(d, "left")
+  ly <- dendro_layout(od, "left", show_labels = FALSE)
+  expect_null(ly$yaxis$tickvals)
+  expect_null(ly$yaxis$ticktext)
+  expect_false(ly$yaxis$showticklabels)
+  expect_equal(ly$yaxis$ticks, "")
+})

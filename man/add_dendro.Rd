@@ -15,6 +15,8 @@ add_dendro(
   color_threshold = NULL,
   hovertext = NULL,
   hang = NULL,
+  line = NULL,
+  show_labels = TRUE,
   ...,
   data = NULL,
   inherit = TRUE
@@ -41,6 +43,11 @@ add_dendro(
 
 \item{hang}{Fraction of tree height for leaf hang (see \code{\link[=dendro_data]{dendro_data()}}).}
 
+\item{line}{A named list of plotly line properties (e.g.
+\code{list(width = 2, dash = "dot")}). See \code{\link[=add_dendro_segments]{add_dendro_segments()}} for details.}
+
+\item{show_labels}{Logical; if \code{FALSE}, omit tick labels from the leaf axis.}
+
 \item{...}{Passed to lower-level plotting calls.}
 
 \item{data}{Optional plotly data.}
@@ -48,8 +55,11 @@ add_dendro(
 \item{inherit}{Plotly inheritance flag.}
 }
 \value{
-A plotly object.
+A plotly object with a \code{"dendro_data"} attribute.
 }
 \description{
-Add A Full Dendrogram To An Existing Plotly Figure
+Computes \code{\link[=dendro_data]{dendro_data()}}, adds segment traces via \code{\link[=add_dendro_traces]{add_dendro_traces()}},
+and applies axis layout via \code{\link[=add_dendro_layout]{add_dendro_layout()}}. For full compositional
+control, call those two functions directly with a pre-computed \code{dendro_data}
+object.
 }

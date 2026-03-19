@@ -4,12 +4,15 @@
 \alias{dendro_layout}
 \title{Build Plotly Layout For Dendrogram Data}
 \usage{
-dendro_layout(dendro, orientation = "bottom")
+dendro_layout(dendro, orientation = "bottom", show_labels = TRUE)
 }
 \arguments{
 \item{dendro}{A list with \code{segments}, \code{labels}, and \code{nodes}.}
 
 \item{orientation}{One of \code{"bottom"}, \code{"top"}, \code{"left"}, or \code{"right"}.}
+
+\item{show_labels}{Logical; if \code{FALSE}, omit tick labels from the leaf axis.
+Useful for subplot embedding.}
 }
 \value{
 A plotly layout list.

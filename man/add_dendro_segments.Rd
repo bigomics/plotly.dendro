@@ -10,6 +10,7 @@ add_dendro_segments(
   orientation = "bottom",
   color_threshold = NULL,
   colorscale = NULL,
+  line = NULL,
   ...,
   data = NULL,
   inherit = TRUE
@@ -25,6 +26,12 @@ add_dendro_segments(
 \item{color_threshold}{Height cutoff for branch colors.}
 
 \item{colorscale}{Optional color vector.}
+
+\item{line}{A named list of plotly line properties (e.g.
+\code{list(width = 2, dash = "dot", color = "black")}). The \code{color} element
+is used as the default segment color when \code{color_threshold} is not active;
+when branch coloring is active, \code{color} is overridden per branch.
+All other elements (\code{width}, \code{dash}, \code{shape}, etc.) always apply.}
 
 \item{...}{Passed to \code{plotly::add_segments()}.}
 
