@@ -1,4 +1,26 @@
+.bare_axis <- function() {
+  list(showgrid = FALSE, zeroline = FALSE, ticks = "")
+}
+
+# Leaf axis: bare styling plus, when show_labels is TRUE, tick positions/text
+# in display order (`values`/`labels` sorted by `values`).
+.leaf_axis <- function(values, labels, show_labels) {
+  axis <- .bare_axis()
+  if (!show_labels) {
+    axis$showticklabels <- FALSE
+    return(axis)
+  }
+  ord <- order(values)
+  axis$tickvals <- as.numeric(values[ord])
+  axis$ticktext <- as.character(labels[ord])
+  axis$tickmode <- "array"
+  axis
+}
+
 #' Build Plotly Layout For Dendrogram Data
+#'
+#' Configures the leaf axis (tick labels at each leaf's display position)
+#' and the height axis (bare, no ticks/grid) for one orientation.
 #'
 #' @param dendro A list with `segments`, `labels`, and `nodes`.
 #' @param orientation One of `"bottom"`, `"top"`, `"left"`, or `"right"`.
@@ -11,36 +33,10 @@ dendro_layout <- function(dendro, orientation = "bottom", show_labels = TRUE) {
 
   labels <- dendro$labels
   if (orientation %in% c("bottom", "top")) {
-    ord <- order(labels$x)
-    axis_leaf <- list(
-      showgrid = FALSE,
-      zeroline = FALSE,
-      ticks = ""
-    )
-    if (show_labels) {
-      axis_leaf$tickvals <- as.numeric(labels$x[ord])
-      axis_leaf$ticktext <- as.character(labels$label[ord])
-      axis_leaf$tickmode <- "array"
-    } else {
-      axis_leaf$showticklabels <- FALSE
-    }
-    axis_other <- list(showgrid = FALSE, zeroline = FALSE, ticks = "")
-    return(list(xaxis = axis_leaf, yaxis = axis_other))
+    axis_leaf <- .leaf_axis(labels$x, labels$label, show_labels)
+    return(list(xaxis = axis_leaf, yaxis = .bare_axis()))
   }
 
-  ord <- order(labels$y)
-  axis_leaf <- list(
-    showgrid = FALSE,
-    zeroline = FALSE,
-    ticks = ""
-  )
-  if (show_labels) {
-    axis_leaf$tickvals <- as.numeric(labels$y[ord])
-    axis_leaf$ticktext <- as.character(labels$label[ord])
-    axis_leaf$tickmode <- "array"
-  } else {
-    axis_leaf$showticklabels <- FALSE
-  }
-  axis_other <- list(showgrid = FALSE, zeroline = FALSE, ticks = "")
-  list(xaxis = axis_other, yaxis = axis_leaf)
+  axis_leaf <- .leaf_axis(labels$y, labels$label, show_labels)
+  list(xaxis = .bare_axis(), yaxis = axis_leaf)
 }

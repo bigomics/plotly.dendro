@@ -43,5 +43,7 @@ All other elements (\code{width}, \code{dash}, \code{shape}, etc.) always apply.
 A plotly object.
 }
 \description{
-Add Dendrogram Segments Layer
+Adds the tree's branch/leaf segments as one or more \code{add_segments()}
+traces — one uniform trace when branch coloring is inactive, or one
+trace per resolved branch color otherwise.
 }

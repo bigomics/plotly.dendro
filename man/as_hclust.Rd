@@ -21,5 +21,6 @@ as_hclust(
 An \code{hclust} object.
 }
 \description{
-Coerce Input To \code{hclust}
+Passes \code{hclust} input through unchanged; runs \code{distfun}/\code{linkagefun} on
+matrix-like or \code{dist} input to produce one.
 }

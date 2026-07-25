@@ -9,7 +9,8 @@ dendro_data(
   distfun = stats::dist,
   linkagefun = function(d) stats::hclust(d, method = "complete"),
   labels = NULL,
-  hang = NULL
+  hang = NULL,
+  nodes = TRUE
 )
 }
 \arguments{
@@ -24,10 +25,19 @@ dendro_data(
 \item{hang}{Non-negative fraction of the tree height at which leaf segments
 are hung below their merge point, or a negative value to drop leaves to
 zero. \code{NULL} (the default) leaves segments unchanged.}
+
+\item{nodes}{Logical; materialize internal merge nodes. Defaults to \code{TRUE}
+for backward compatibility. When \code{FALSE}, the native kernel skips node
+construction entirely (not just discarding it after the fact) and the
+result retains a typed empty \code{nodes} data frame; callers that only need
+\code{segments}/\code{labels} (e.g. \code{\link[=add_dendro_segments]{add_dendro_segments()}}, \code{\link[=add_dendro_layout]{add_dendro_layout()}})
+should pass \code{FALSE} to avoid paying for node geometry they don't use.}
 }
 \value{
 A list with \code{segments}, \code{labels}, and \code{nodes} data frames.
 }
 \description{
-Build Tidy Dendrogram Data
+Coerces \code{x} to an \code{hclust} tree and computes its plot-ready geometry
+(segments, leaf labels, and optionally internal nodes) via the native
+geometry kernel in a single compiled pass.
 }

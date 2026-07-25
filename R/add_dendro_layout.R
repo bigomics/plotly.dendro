@@ -19,7 +19,9 @@ add_dendro_layout <- function(
     orientation = "bottom",
     show_labels = TRUE
 ) {
-  od <- orient_data(dendro, orientation = orientation)
+  .validate_orientation(orientation)
+  od <- dendro
+  od$labels <- .orient_xy(dendro$labels, orientation)
   do.call(
     plotly::layout,
     c(list(p), dendro_layout(od, orientation = orientation, show_labels = show_labels))

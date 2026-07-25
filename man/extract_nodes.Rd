@@ -13,5 +13,5 @@ extract_nodes(hc)
 A data frame with columns \code{x}, \code{y}, \code{members}, and \code{height}.
 }
 \description{
-Extract Internal Merge Nodes
+Thin wrapper around the native geometry kernel returning only \code{nodes}.
 }

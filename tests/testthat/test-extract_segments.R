@@ -13,7 +13,9 @@ ref_segs <- function(data, method = "complete") {
 
 # Helper: sort a segments data.frame for order-independent comparison.
 sort_segs <- function(s) {
-  s[order(s$x, s$y, s$xend, s$yend), ]
+  out <- s[order(s$x, s$y, s$xend, s$yend), ]
+  rownames(out) <- NULL
+  out
 }
 
 # --- Structure -----------------------------------------------------------

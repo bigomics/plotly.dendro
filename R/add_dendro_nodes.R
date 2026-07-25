@@ -1,5 +1,9 @@
 #' Add Dendrogram Merge Node Layer
 #'
+#' Adds a marker trace at each internal merge node, hoverable with member
+#' count and merge height. Requires `dendro` to have been built with
+#' `dendro_data(..., nodes = TRUE)`.
+#'
 #' @param p A plotly object.
 #' @param dendro A `dendro_data()` result.
 #' @param orientation Dendrogram orientation.
@@ -18,8 +22,9 @@ add_dendro_nodes <- function(
     inherit = FALSE
 ) {
   .validate_orientation(orientation)
-  oriented <- orient_data(dendro, orientation = orientation)
-  nodes <- oriented$nodes
+  # This layer consumes only nodes. Avoid orienting/copying segments and
+  # labels, which are handled independently by their own layers.
+  nodes <- .orient_xy(dendro$nodes, orientation)
 
   plotly::add_trace(
     p,

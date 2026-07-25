@@ -1,5 +1,8 @@
 #' Add Dendrogram Label Layer
 #'
+#' Adds a text trace placing each leaf label at its display position. Useful
+#' when tick labels are unavailable or undesired (e.g. subplot embedding).
+#'
 #' @param p A plotly object.
 #' @param dendro A `dendro_data()` result.
 #' @param orientation Dendrogram orientation.
@@ -25,8 +28,7 @@ add_dendro_labels <- function(
     warning("This plot already has axis tick labels; add_dendro_labels() may duplicate leaf labels.", call. = FALSE)
   }
 
-  oriented <- orient_data(dendro, orientation = orientation)
-  labels <- oriented$labels
+  labels <- .orient_xy(dendro$labels, orientation)
 
   plotly::add_trace(
     p,

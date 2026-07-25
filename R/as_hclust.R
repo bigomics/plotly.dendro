@@ -1,5 +1,8 @@
 #' Coerce Input To `hclust`
 #'
+#' Passes `hclust` input through unchanged; runs `distfun`/`linkagefun` on
+#' matrix-like or `dist` input to produce one.
+#'
 #' @param x A numeric matrix/data frame, `dist`, or `hclust` object.
 #' @param distfun Distance function used when `x` is matrix-like.
 #' @param linkagefun Linkage function used when `x` is matrix-like or `dist`.

@@ -1,5 +1,10 @@
 #' Create A Plotly Dendrogram
 #'
+#' Convenience entry point that creates a new plotly widget and calls
+#' [add_dendro()] on it. For adding a dendrogram to an existing figure or
+#' subplot, call [add_dendro()] (or the lower-level `add_dendro_*()`
+#' functions) directly.
+#'
 #' @param x Input data (`matrix`, `data.frame`, `dist`, or `hclust`).
 #' @param orientation One of `"bottom"`, `"top"`, `"left"`, or `"right"`.
 #' @param labels Optional custom labels.

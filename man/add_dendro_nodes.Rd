@@ -30,5 +30,7 @@ add_dendro_nodes(
 A plotly object.
 }
 \description{
-Add Dendrogram Merge Node Layer
+Adds a marker trace at each internal merge node, hoverable with member
+count and merge height. Requires \code{dendro} to have been built with
+\code{dendro_data(..., nodes = TRUE)}.
 }

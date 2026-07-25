@@ -19,5 +19,8 @@ color_branches(segs, hc, color_threshold = NULL, colorscale = NULL)
 \code{segs} with a \code{color} column.
 }
 \description{
-Color Dendrogram Segments
+Assigns a \code{color} per segment by cluster membership at \code{color_threshold}.
+Uses the native branch-ID kernel when \code{segs} has canonical coordinates
+(the common case), falling back to an R topology reconstruction for
+reordered or subset segment tables.
 }

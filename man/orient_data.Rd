@@ -15,5 +15,8 @@ orient_data(dendro, orientation = "bottom")
 The transformed \code{dendro} list.
 }
 \description{
-Orient Dendrogram Coordinates
+Rotates/flips \code{segments}, \code{labels}, and \code{nodes} together for a given
+orientation. Prefer orienting only the parts a caller needs (see
+\code{\link[=add_dendro_segments]{add_dendro_segments()}}, \code{\link[=add_dendro_labels]{add_dendro_labels()}}) — this whole-list
+transform copies every component.
 }

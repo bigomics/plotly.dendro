@@ -18,5 +18,6 @@ Useful for subplot embedding.}
 A plotly layout list.
 }
 \description{
-Build Plotly Layout For Dendrogram Data
+Configures the leaf axis (tick labels at each leaf's display position)
+and the height axis (bare, no ticks/grid) for one orientation.
 }

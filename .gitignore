@@ -36,6 +36,12 @@ renv/
 # Output files from R CMD check
 /*.Rcheck/
 
+# Compiled objects from source packages
+src/*.o
+src/*.so
+src/*.dll
+src/symbols.rds
+
 # R graphics device artifacts
 Rplots.pdf
 **/Rplots.pdf

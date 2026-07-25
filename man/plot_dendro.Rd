@@ -58,5 +58,8 @@ plot_dendro(
 A \code{plotly} htmlwidget with a \code{"dendro_data"} attribute.
 }
 \description{
-Create A Plotly Dendrogram
+Convenience entry point that creates a new plotly widget and calls
+\code{\link[=add_dendro]{add_dendro()}} on it. For adding a dendrogram to an existing figure or
+subplot, call \code{\link[=add_dendro]{add_dendro()}} (or the lower-level \verb{add_dendro_*()}
+functions) directly.
 }

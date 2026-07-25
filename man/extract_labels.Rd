@@ -15,5 +15,5 @@ extract_labels(hc, labels = NULL)
 A data frame with columns \code{x}, \code{y}, \code{label}.
 }
 \description{
-Extract Leaf Labels
+Thin wrapper around the native geometry kernel returning only \code{labels}.
 }

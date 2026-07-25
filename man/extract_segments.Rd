@@ -13,5 +13,5 @@ extract_segments(hc)
 A data frame with columns \code{x}, \code{y}, \code{xend}, \code{yend}.
 }
 \description{
-Extract Dendrogram Segments
+Thin wrapper around the native geometry kernel returning only \code{segments}.
 }

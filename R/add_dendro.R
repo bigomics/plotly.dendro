@@ -46,7 +46,14 @@ add_dendro <- function(
     warning("hovertext is not yet implemented and will be ignored.", call. = FALSE)
   }
 
-  d <- dendro_data(x, distfun = distfun, linkagefun = linkagefun, labels = labels, hang = hang)
+  d <- dendro_data(
+    x,
+    distfun = distfun,
+    linkagefun = linkagefun,
+    labels = labels,
+    hang = hang,
+    nodes = FALSE
+  )
 
   p <- add_dendro_traces(
     p,

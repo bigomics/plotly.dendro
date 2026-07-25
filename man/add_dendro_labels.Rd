@@ -30,5 +30,6 @@ add_dendro_labels(
 A plotly object.
 }
 \description{
-Add Dendrogram Label Layer
+Adds a text trace placing each leaf label at its display position. Useful
+when tick labels are unavailable or undesired (e.g. subplot embedding).
 }
