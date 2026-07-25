@@ -17,6 +17,12 @@ struct GeometryPlan {
   std::vector<double> node_x;
   std::vector<int> members;
   std::vector<double> midpoint;
+  // Leaf display-position span of each merge's subtree. Retained on the plan
+  // (rather than kept local to make_plan) because the level-of-detail node
+  // table exposes it: span drives both viewport culling and collapsed-clade
+  // base geometry.
+  std::vector<int> min_position;
+  std::vector<int> max_position;
 };
 
 inline bool finite_number(double value) {
@@ -162,10 +168,12 @@ GeometryPlan make_plan(
   plan.node_x.resize(m);
   plan.members.resize(m);
   plan.midpoint.resize(m);
+  plan.min_position.resize(m);
+  plan.max_position.resize(m);
 
+  std::vector<int>& min_position = plan.min_position;
+  std::vector<int>& max_position = plan.max_position;
   std::vector<int> leaf_position(n);
-  std::vector<int> min_position(m);
-  std::vector<int> max_position(m);
   for (int position = 0; position < n; ++position) {
     const int leaf_index = order[position] - 1;
     plan.leaf_x[leaf_index] = static_cast<double>(position + 1);
@@ -424,6 +432,54 @@ List cpp_hclust_geometry(
     _["segments"] = make_segments(merge, height, plan),
     _["labels"] = make_labels(order, labels, plan),
     _["nodes"] = make_nodes(height, plan, need_nodes)
+  );
+}
+
+// Full per-merge node table in merge-row order, the substrate for
+// level-of-detail cuts.
+//
+// Deliberately separate from the `nodes` output of the main geometry pass,
+// which deduplicates by (height, x) and leaves `members` as NA to preserve
+// compatibility with plotly's original plot_dendro(). A cut needs the opposite
+// contract: exactly one row per merge, in merge-row order, so that row i
+// corresponds to merge[i, ] and child indices resolve by position.
+//
+// [[Rcpp::export]]
+DataFrame node_table(
+    IntegerMatrix merge,
+    NumericVector height,
+    IntegerVector order
+) {
+  const GeometryPlan plan = make_plan(merge, height, order, -1.0);
+  const int m = plan.m;
+
+  NumericVector x(m);
+  NumericVector node_height(m);
+  IntegerVector members(m);
+  IntegerVector span_lo(m);
+  IntegerVector span_hi(m);
+  IntegerVector left(m);
+  IntegerVector right(m);
+
+  for (int row = 0; row < m; ++row) {
+    x[row] = plan.node_x[row];
+    node_height[row] = height[row];
+    members[row] = plan.members[row];
+    span_lo[row] = plan.min_position[row];
+    span_hi[row] = plan.max_position[row];
+    left[row] = merge(row, 0);
+    right[row] = merge(row, 1);
+  }
+
+  return DataFrame::create(
+    _["x"] = x,
+    _["height"] = node_height,
+    _["members"] = members,
+    _["span_lo"] = span_lo,
+    _["span_hi"] = span_hi,
+    _["left"] = left,
+    _["right"] = right,
+    _["stringsAsFactors"] = false
   );
 }
 

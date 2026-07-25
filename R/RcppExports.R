@@ -5,6 +5,10 @@ cpp_hclust_geometry <- function(merge, height, order, labels, leaf_drop, need_no
     .Call(`_plotly_dendro_cpp_hclust_geometry`, merge, height, order, labels, leaf_drop, need_nodes)
 }
 
+node_table <- function(merge, height, order) {
+    .Call(`_plotly_dendro_node_table`, merge, height, order)
+}
+
 cpp_hclust_branch_ids <- function(merge, height, order, segment_x, segment_y, segment_xend, segment_yend, leaf_color_ids) {
     .Call(`_plotly_dendro_cpp_hclust_branch_ids`, merge, height, order, segment_x, segment_y, segment_xend, segment_yend, leaf_color_ids)
 }

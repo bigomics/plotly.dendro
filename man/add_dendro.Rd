@@ -17,6 +17,8 @@ add_dendro(
   hang = NULL,
   line = NULL,
   show_labels = TRUE,
+  max_leaves = Inf,
+  height_range = c("data", "full"),
   ...,
   data = NULL,
   inherit = TRUE
@@ -47,6 +49,13 @@ add_dendro(
 \code{list(width = 2, dash = "dot")}). See \code{\link[=add_dendro_segments]{add_dendro_segments()}} for details.}
 
 \item{show_labels}{Logical; if \code{FALSE}, omit tick labels from the leaf axis.}
+
+\item{max_leaves}{Maximum number of visible clades. \code{Inf} (the default)
+draws every merge. A finite value applies \code{\link[=dendro_cut]{dendro_cut()}} and draws the
+collapsed frontier via \code{\link[=add_dendro_clades]{add_dendro_clades()}}. For control over the cut
+priority or the clade glyphs, call those functions directly instead.}
+
+\item{height_range}{Passed to \code{\link[=add_dendro_layout]{add_dendro_layout()}}.}
 
 \item{...}{Passed to lower-level plotting calls.}
 

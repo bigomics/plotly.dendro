@@ -26,17 +26,43 @@
 #' @param orientation One of `"bottom"`, `"top"`, `"left"`, or `"right"`.
 #' @param show_labels Logical; if `FALSE`, omit tick labels from the leaf axis.
 #'   Useful for subplot embedding.
+#' @param height_range Optional numeric range for the height axis, in native
+#'   (pre-orientation) coordinates. `NULL` leaves the axis unset so plotly
+#'   autoranges.
 #'
 #' @return A plotly layout list.
-dendro_layout <- function(dendro, orientation = "bottom", show_labels = TRUE) {
+dendro_layout <- function(
+    dendro,
+    orientation = "bottom",
+    show_labels = TRUE,
+    height_range = NULL
+) {
   .validate_orientation(orientation)
 
+  axis_height <- .height_axis(height_range, orientation)
   labels <- dendro$labels
   if (orientation %in% c("bottom", "top")) {
     axis_leaf <- .leaf_axis(labels$x, labels$label, show_labels)
-    return(list(xaxis = axis_leaf, yaxis = .bare_axis()))
+    return(list(xaxis = axis_leaf, yaxis = axis_height))
   }
 
   axis_leaf <- .leaf_axis(labels$y, labels$label, show_labels)
-  list(xaxis = .bare_axis(), yaxis = axis_leaf)
+  list(xaxis = axis_height, yaxis = axis_leaf)
+}
+
+# Height axis: bare styling, plus an explicit range when one was requested.
+# The range arrives in native coordinates, so it needs the same flip that
+# `.orient_xy()` applies to the data — only "top" negates the height axis.
+.height_axis <- function(height_range, orientation) {
+  axis <- .bare_axis()
+  if (is.null(height_range)) {
+    return(axis)
+  }
+  axis$range <- if (orientation == "top") {
+    c(-height_range[2L], -height_range[1L])
+  } else {
+    height_range
+  }
+  axis$autorange <- FALSE
+  axis
 }

@@ -4,7 +4,12 @@
 \alias{dendro_layout}
 \title{Build Plotly Layout For Dendrogram Data}
 \usage{
-dendro_layout(dendro, orientation = "bottom", show_labels = TRUE)
+dendro_layout(
+  dendro,
+  orientation = "bottom",
+  show_labels = TRUE,
+  height_range = NULL
+)
 }
 \arguments{
 \item{dendro}{A list with \code{segments}, \code{labels}, and \code{nodes}.}
@@ -13,6 +18,10 @@ dendro_layout(dendro, orientation = "bottom", show_labels = TRUE)
 
 \item{show_labels}{Logical; if \code{FALSE}, omit tick labels from the leaf axis.
 Useful for subplot embedding.}
+
+\item{height_range}{Optional numeric range for the height axis, in native
+(pre-orientation) coordinates. \code{NULL} leaves the axis unset so plotly
+autoranges.}
 }
 \value{
 A plotly layout list.

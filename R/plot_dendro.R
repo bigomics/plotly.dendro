@@ -17,6 +17,8 @@
 #' @param line A named list of plotly line properties (e.g.
 #'   `list(width = 2, dash = "dot")`). See [add_dendro_segments()] for details.
 #' @param show_labels Logical; if `FALSE`, omit tick labels from the leaf axis.
+#' @param max_leaves Maximum number of visible clades; see [add_dendro()].
+#' @param height_range Height axis range; see [add_dendro_layout()].
 #' @param width Optional widget width.
 #' @param height Optional widget height.
 #' @param source Source id for `event_data()`.
@@ -36,6 +38,8 @@ plot_dendro <- function(
     hang = NULL,
     line = NULL,
     show_labels = TRUE,
+    max_leaves = Inf,
+    height_range = c("data", "full"),
     width = NULL,
     height = NULL,
     source = "A",
@@ -55,6 +59,8 @@ plot_dendro <- function(
     hang = hang,
     line = line,
     show_labels = show_labels,
+    max_leaves = max_leaves,
+    height_range = height_range,
     ...
   )
 }

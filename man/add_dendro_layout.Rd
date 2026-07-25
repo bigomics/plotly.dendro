@@ -4,7 +4,13 @@
 \alias{add_dendro_layout}
 \title{Apply Dendrogram Layout To A Plotly Object}
 \usage{
-add_dendro_layout(p, dendro, orientation = "bottom", show_labels = TRUE)
+add_dendro_layout(
+  p,
+  dendro,
+  orientation = "bottom",
+  show_labels = TRUE,
+  height_range = c("data", "full")
+)
 }
 \arguments{
 \item{p}{A plotly object.}
@@ -15,6 +21,13 @@ add_dendro_layout(p, dendro, orientation = "bottom", show_labels = TRUE)
 
 \item{show_labels}{Logical; if \code{FALSE}, omit tick labels from the
 leaf axis. Useful for subplot embedding.}
+
+\item{height_range}{Controls the height axis range. \code{"data"} (the default)
+leaves it unset so plotly autoranges to fit — with \code{hang} this yields the
+fitted axis that hierarchical-clustering plots conventionally use.
+\code{"full"} anchors the axis at zero, spanning \code{c(0, max_height)}. A
+\code{numeric(2)} clips to an explicit range, in native (pre-orientation)
+coordinates.}
 }
 \value{
 A plotly object with layout applied.

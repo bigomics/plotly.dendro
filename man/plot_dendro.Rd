@@ -16,6 +16,8 @@ plot_dendro(
   hang = NULL,
   line = NULL,
   show_labels = TRUE,
+  max_leaves = Inf,
+  height_range = c("data", "full"),
   width = NULL,
   height = NULL,
   source = "A",
@@ -45,6 +47,10 @@ plot_dendro(
 \code{list(width = 2, dash = "dot")}). See \code{\link[=add_dendro_segments]{add_dendro_segments()}} for details.}
 
 \item{show_labels}{Logical; if \code{FALSE}, omit tick labels from the leaf axis.}
+
+\item{max_leaves}{Maximum number of visible clades; see \code{\link[=add_dendro]{add_dendro()}}.}
+
+\item{height_range}{Height axis range; see \code{\link[=add_dendro_layout]{add_dendro_layout()}}.}
 
 \item{width}{Optional widget width.}
 

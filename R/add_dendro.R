@@ -18,6 +18,11 @@
 #' @param line A named list of plotly line properties (e.g.
 #'   `list(width = 2, dash = "dot")`). See [add_dendro_segments()] for details.
 #' @param show_labels Logical; if `FALSE`, omit tick labels from the leaf axis.
+#' @param max_leaves Maximum number of visible clades. `Inf` (the default)
+#'   draws every merge. A finite value applies [dendro_cut()] and draws the
+#'   collapsed frontier via [add_dendro_clades()]. For control over the cut
+#'   priority or the clade glyphs, call those functions directly instead.
+#' @param height_range Passed to [add_dendro_layout()].
 #' @param ... Passed to lower-level plotting calls.
 #' @param data Optional plotly data.
 #' @param inherit Plotly inheritance flag.
@@ -37,6 +42,8 @@ add_dendro <- function(
     hang = NULL,
     line = NULL,
     show_labels = TRUE,
+    max_leaves = Inf,
+    height_range = c("data", "full"),
     ...,
     data = NULL,
     inherit = TRUE
@@ -55,6 +62,13 @@ add_dendro <- function(
     nodes = FALSE
   )
 
+  d <- dendro_cut(d, max_leaves = max_leaves)
+
+  # Clades first so the branch traces draw over the glyph outlines.
+  if (!is.null(d$clades)) {
+    p <- add_dendro_clades(p, d, orientation = orientation)
+  }
+
   p <- add_dendro_traces(
     p,
     d,
@@ -67,7 +81,12 @@ add_dendro <- function(
     inherit = inherit
   )
 
-  p <- add_dendro_layout(p, d, orientation = orientation, show_labels = show_labels)
+  p <- add_dendro_layout(
+    p, d,
+    orientation = orientation,
+    show_labels = show_labels,
+    height_range = height_range
+  )
 
   attr(p, "dendro_data") <- d
   p

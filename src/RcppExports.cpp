@@ -26,6 +26,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// node_table
+DataFrame node_table(IntegerMatrix merge, NumericVector height, IntegerVector order);
+RcppExport SEXP _plotly_dendro_node_table(SEXP mergeSEXP, SEXP heightSEXP, SEXP orderSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix >::type merge(mergeSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type height(heightSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type order(orderSEXP);
+    rcpp_result_gen = Rcpp::wrap(node_table(merge, height, order));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_hclust_branch_ids
 Nullable<IntegerVector> cpp_hclust_branch_ids(IntegerMatrix merge, NumericVector height, IntegerVector order, NumericVector segment_x, NumericVector segment_y, NumericVector segment_xend, NumericVector segment_yend, IntegerVector leaf_color_ids);
 RcppExport SEXP _plotly_dendro_cpp_hclust_branch_ids(SEXP mergeSEXP, SEXP heightSEXP, SEXP orderSEXP, SEXP segment_xSEXP, SEXP segment_ySEXP, SEXP segment_xendSEXP, SEXP segment_yendSEXP, SEXP leaf_color_idsSEXP) {
@@ -47,6 +60,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_plotly_dendro_cpp_hclust_geometry", (DL_FUNC) &_plotly_dendro_cpp_hclust_geometry, 6},
+    {"_plotly_dendro_node_table", (DL_FUNC) &_plotly_dendro_node_table, 3},
     {"_plotly_dendro_cpp_hclust_branch_ids", (DL_FUNC) &_plotly_dendro_cpp_hclust_branch_ids, 8},
     {NULL, NULL, 0}
 };
